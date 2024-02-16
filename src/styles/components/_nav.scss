@@ -1,0 +1,106 @@
+$color-background: #ffffff;
+$color-primary: #007bff;
+$color-text: #333333;
+$color-hover: #0056b3;
+$nav-height: 8vh;
+$nav-item-spacing: 3.3vh;
+$underline-thickness: 0.266vh;
+$background-image-logo: url(../../assets/image/kafka.jpg);
+$background-image-authentification: url(../../assets/image/compte.png);
+$logo-size: 8vh;
+$authentification-size: 5vh;
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $color-background;
+  box-shadow: 0 0.026vh 0.053vh rgba(0, 0, 0, 0.1);
+  padding: 0;
+  height: $nav-height;
+
+  .endpoints {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+
+  .logo,
+  .authentication {
+    margin: 0 $nav-item-spacing;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  }
+
+  .logo {
+    width: $logo-size;
+    height: $logo-size;
+    background-image: $background-image-logo;
+  }
+
+  .authentication {
+    width: $authentification-size;
+    height: $authentification-size;
+    background-image: $background-image-authentification;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-text;
+    font-weight: 500;
+    padding: 0 2vh;
+    display: flex;
+    align-items: center;
+    border-bottom: $underline-thickness solid transparent;
+
+    &:hover,
+    &.active {
+      border-bottom-color: $color-primary;
+      color: $color-primary;
+    }
+  }
+
+  .logo-link,
+  .authentification-link {
+    border-bottom: none !important;
+
+    &:hover,
+    &.active {
+      border-bottom: none !important;
+      color: inherit;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation .menu,
+  .navigation .endpoints {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo,
+  .authentication {
+    margin: 1vh 0;
+  }
+}

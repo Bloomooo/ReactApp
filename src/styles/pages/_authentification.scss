@@ -1,0 +1,162 @@
+$color-text-light: #ffffff;
+$color-text-dark: #000000;
+$background-dark: linear-gradient(45deg, #000, #fff);
+$background-light: linear-gradient(45deg, #fff, #000);
+$primary-color-dark-mode: #000;
+$hover-color-dark-mode: #000;
+$primary-color-light-mode: #000;
+$hover-color-light-mode: #333;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 0.5vh;
+$transition-time: 0.3s;
+
+@mixin button-style($text-color, $background-color, $hover-background-color) {
+  color: $text-color;
+  background-color: $background-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  width: 100%;
+  padding: 1.5vh 0;
+  transition: background-color $transition-time, color $transition-time;
+
+  &:hover {
+    background-color: $hover-background-color;
+  }
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(-45deg, #fff, #000);
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: animateGradient 15s ease infinite;
+  }
+}
+
+@keyframes animateGradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: linear-gradient(-45deg, #000, #fff);
+  background-size: 400% 400%;
+  animation: animateGradient 15s ease infinite;
+}
+
+.auth-form {
+  z-index: 10;
+  padding: 4vh;
+  border-radius: $border-radius;
+  box-shadow: 0 0.4vh 0.6vh $shadow-color;
+  width: 50vw;
+  max-width: 500px;
+  min-width: 300px;
+  transition: box-shadow $transition-time, background-color $transition-time;
+  position: relative;
+  background: $background-light;
+  color: $color-text-dark;
+
+  &.dark {
+    background: $background-dark;
+    color: $color-text-light;
+
+    .btn-login {
+      @include button-style(
+        $color-text-light,
+        $primary-color-dark-mode,
+        $hover-color-dark-mode
+      );
+    }
+
+    input,
+    label,
+    .links a {
+      color: $color-text-light;
+    }
+  }
+
+  &.light {
+    background: $background-light;
+    color: $color-text-dark;
+
+    .btn-login {
+      @include button-style(
+        $color-text-dark,
+        $primary-color-light-mode,
+        $hover-color-light-mode
+      );
+    }
+
+    input,
+    label,
+    .links a {
+      color: $color-text-dark;
+    }
+  }
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 2vh;
+
+  label {
+    display: block;
+    margin-bottom: 1vh;
+  }
+
+  input {
+    width: 90%;
+    padding: 1.5vh;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.4vh;
+    background-color: transparent;
+    color: inherit;
+    transition: border-color $transition-time, box-shadow $transition-time,
+      background-color $transition-time;
+
+    &:focus {
+      border-color: darken($color-text-light, 10%);
+      box-shadow: 0 0 0.5vh lighten($color-text-light, 20%);
+      outline: none;
+    }
+  }
+}
+
+.links {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    transition: color $transition-time;
+
+    &:hover {
+      color: darken($color-text-light, 20%);
+    }
+  }
+}
