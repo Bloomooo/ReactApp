@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/pages/_authentification.scss";
-import Nav from "../components/Nav";
 
 const Forgot = () => {
   const [password, setPassword] = useState("");
@@ -38,7 +37,6 @@ const Forgot = () => {
 
   return (
     <div>
-      <Nav />
       <div className="auth-container">
         <form className="auth-form" onSubmit={handleSubmit}>
           <h2>Changer votre mot de passe</h2>

@@ -3,65 +3,41 @@ import { NavLink } from "react-router-dom";
 import "../styles/components/_nav.scss";
 
 const Nav = () => {
-  // Composant Dropdown amélioré
-  const Dropdown = ({ title, links }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleDropdown = () => setIsOpen(!isOpen);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    return (
-      <div className="dropdown">
-        <button onClick={toggleDropdown} className="dropbtn">
-          {title}
-        </button>
-        {isOpen && (
-          <div className="dropdown-content">
-            {links.map((link, index) => (
-              <NavLink key={index} to={link.path} className="dropdown-item">
-                {link.name}
-              </NavLink>
-            ))}
-          </div>
-        )}
-      </div>
-    );
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
-  const departmentLinks = [
-    { name: "Ressources Humaines", path: "/hr" },
-    { name: "Support IT", path: "/it-support" },
-    { name: "Finance", path: "/finance" },
-  ];
-
-  const projectLinks = [
-    { name: "Projet A", path: "/project-a" },
-    { name: "Projet B", path: "/project-b" },
-  ];
-
   return (
-    <nav className="navigation">
+    <nav className={`navigation ${menuOpen ? "open" : ""}`}>
       <NavLink to="/" className="logo logo-link"></NavLink>
 
       <div className="menu">
-        <ul>
+        <button className="menu-toggle" onClick={toggleMenu}>
+          Menu
+        </button>
+        <ul className={`${menuOpen ? "open" : ""}`}>
           <li>
-            <NavLink to="/dashboard">Tableau de Bord</NavLink>
+            <NavLink to="/" onClick={toggleMenu}>
+              Accueil
+            </NavLink>
           </li>
           <li>
-            <Dropdown title="Départements" links={departmentLinks} />
+            <NavLink to="/dashboard" onClick={toggleMenu}>
+              Dashboard
+            </NavLink>
           </li>
           <li>
-            <Dropdown title="Projets" links={projectLinks} />
-          </li>
-          <li>
-            <NavLink to="/company-news">Actualités de l'Entreprise</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/ez" onClick={toggleMenu}>
+              Ez
+            </NavLink>
           </li>
         </ul>
       </div>
+
       <NavLink
-        to="/authentication"
+        to="/authentification"
         className="authentication authentification-link"
       ></NavLink>
     </nav>

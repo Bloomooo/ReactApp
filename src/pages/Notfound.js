@@ -1,12 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/pages/_notfound.scss";
-import Nav from "../components/Nav";
 
 const NotFound = () => {
   return (
     <div>
-      <Nav />
       <div className="notfound-container">
         <h1>404</h1>
         <p>Oups! La page que vous recherchez semble introuvable.</p>

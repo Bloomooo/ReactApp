@@ -14,132 +14,132 @@ $authentification-size: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $color-background;
+  background-color: #ffffff;
   box-shadow: 0 0.026vh 0.053vh rgba(0, 0, 0, 0.1);
   padding: 0;
-  height: $nav-height;
-
-  .endpoints {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: auto;
-  }
+  height: 8vh;
 
   .menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
+    position: relative;
+
+    .menu-toggle {
+      display: none;
+    }
 
     ul {
-      list-style: none;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
+      list-style: none;
       padding: 0;
-    }
-  }
+      margin: 0;
 
-  .logo,
-  .authentication {
-    margin: 0 $nav-item-spacing;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  }
+      li {
+        margin: 0 1rem;
+        position: relative;
 
-  .logo {
-    width: $logo-size;
-    height: $logo-size;
-    background-image: $background-image-logo;
-  }
+        a {
+          text-decoration: none;
+          color: #333333;
+          font-weight: 500;
+          transition: color 0.3s;
 
-  .authentication {
-    width: $authentification-size;
-    height: $authentification-size;
-    background-image: $background-image-authentification;
-  }
+          &:hover,
+          &.active {
+            color: #007bff;
+          }
+        }
 
-  a {
-    text-decoration: none;
-    color: $color-text;
-    font-weight: 500;
-    padding: 0 2vh;
-    display: flex;
-    align-items: center;
-    border-bottom: $underline-thickness solid transparent;
+        ul {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: #ffffff;
+          box-shadow: 0 0.026vh 0.053vh rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          list-style: none;
 
-    &:hover,
-    &.active {
-      border-bottom-color: $color-primary;
-      color: $color-primary;
-    }
-  }
+          li {
+            padding: 0.5rem 0;
 
-  .logo-link,
-  .authentification-link {
-    border-bottom: none !important;
+            a {
+              color: #333333;
+              transition: color 0.3s;
 
-    &:hover,
-    &.active {
-      border-bottom: none !important;
-      color: inherit;
-    }
-  }
-}
+              &:hover {
+                color: #007bff;
+              }
+            }
+          }
+        }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-
-  .dropbtn {
-    background-color: $color-background;
-    color: $color-text;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: $color-background;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-
-    .dropdown-item {
-      color: $color-text;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-
-      &:hover {
-        background-color: $color-hover;
-        color: $color-background;
+        &:hover > ul {
+          display: block;
+        }
       }
     }
   }
 
-  &:hover .dropdown-content,
-  .dropdown-content:hover {
-    display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  .navigation .menu,
-  .navigation .endpoints {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .logo,
   .authentication {
-    margin: 1vh 0;
+    margin: 0 3.3vh;
+    width: 8vh;
+    height: 8vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s;
+  }
+
+  .logo {
+    background-image: url(../../assets/image/kafka.jpg);
+  }
+
+  .authentication {
+    width: 5vh;
+    height: 5vh;
+    background-image: url(../../assets/image/compte.png);
+  }
+
+  @media (max-width: 768px) {
+    .menu .menu-toggle {
+      display: block;
+      cursor: pointer;
+      padding: 0 2vh;
+    }
+
+    .menu ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #ffffff;
+      box-shadow: 0 0.026vh 0.053vh rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      padding: 1rem;
+      display: none;
+
+      &.open {
+        display: flex;
+      }
+
+      li {
+        margin: 0;
+        padding: 1rem 0;
+
+        a {
+          display: block;
+          color: #333333;
+
+          &:hover {
+            color: #007bff;
+          }
+        }
+      }
+    }
+
+    .logo,
+    .authentication {
+      margin: 1vh 0;
+    }
   }
 }

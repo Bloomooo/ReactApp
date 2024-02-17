@@ -1,0 +1,28 @@
+.dashboard-content {
+  flex-grow: 1; // This will make the content grow to fill the space
+  padding: 20px; // This padding is inside the content, no need to subtract it from width
+  background-color: #fff; // Keeping the background white
+  overflow-y: auto; // Allows scrolling if content is taller than the screen
+
+  h1 {
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-widgets {
+    display: flex;
+    justify-content: space-between; // This spreads out the widgets
+    gap: 20px; // Adds space between the widgets
+
+    .widget {
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        color: #555;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

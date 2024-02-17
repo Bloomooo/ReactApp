@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/pages/_authentification.scss";
-import Nav from "../components/Nav";
 import { useSession } from "./Session";
 
 const FirstConnection = () => {
@@ -40,7 +39,6 @@ const FirstConnection = () => {
 
   return (
     <div>
-      <Nav />
       <div className="auth-container">
         <form className="auth-form" onSubmit={handleSubmit}>
           <h2>Configurer votre mot de passe</h2>

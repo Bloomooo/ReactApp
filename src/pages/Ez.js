@@ -1,10 +1,8 @@
 import React from "react";
-import Nav from "../components/Nav";
 
 const Ez = () => {
   return (
     <div>
-      <Nav />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quos
         eveniet beatae eius nesciunt vel architecto dicta cum modi. Deleniti et

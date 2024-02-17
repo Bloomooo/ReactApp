@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../styles/pages/_authentification.scss";
-import Nav from "../components/Nav";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -44,7 +43,6 @@ const Authentification = () => {
 
   return (
     <div>
-      <Nav />
       <div className={`auth-container ${isDarkMode ? "dark" : "light"}`}>
         <form
           className={`auth-form ${isDarkMode ? "dark" : "light"}`}
