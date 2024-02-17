@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/pages/_authentification.scss";
 
 const Forgot = () => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -30,7 +30,7 @@ const Forgot = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Erreur lors de la première connexion: ", error);
+      console.error("Erreur lors de la réinitialisation du mot de passe: ", error);
       setErrorMessage("Une erreur s'est produite. Veuillez réessayer.");
     }
   };

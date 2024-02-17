@@ -5,28 +5,31 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useSession } from "./Session";
 
+
+interface DecodedToken {
+  sub: string; 
+  firsttime?: boolean;
+}
+
 const Authentification = () => {
-  const [isDarkMode] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [isDarkMode] = useState<boolean>(true);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { setEmailUser } = useSession();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/authentification",
-        {
-          email,
-          password,
-        }
-      );
+      const res = await axios.post("http://localhost:8080/api/authentification", {
+        email,
+        password,
+      });
       if (res.status === 200) {
-        const token = res.data.jwtMap;
-        const decodedToken = jwtDecode(token);
+        const token: string = res.data.jwtMap; 
+        const decodedToken: DecodedToken = jwtDecode(token);
         setEmailUser(decodedToken.sub);
         if (decodedToken.firsttime) {
           navigate("/first");
@@ -60,6 +63,7 @@ const Authentification = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Mot de passe</label>
             <div className="password-input-container">
@@ -79,10 +83,13 @@ const Authentification = () => {
               </button>
             </div>
           </div>
+
           <button type="submit" className="btn-login">
             Se connecter
           </button>
+
           {errorMessage && <div className="error-message">{errorMessage}</div>}
+
           <div className="links">
             <NavLink to="/forgot">Mot de passe oublié ?</NavLink>
           </div>

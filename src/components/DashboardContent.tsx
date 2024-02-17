@@ -54,8 +54,7 @@ const DashboardContent = () => {
                 cx={200}
                 cy={200}
                 outerRadius={60}
-                fill="#8884d8"
-              >
+                fill="#8884d8" dataKey={""}              >
                 {dataPie.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
@@ -66,7 +65,7 @@ const DashboardContent = () => {
               <Tooltip />
             </PieChart>
           </div>
-          {/* Ajoutez ici d'autres widgets si nécessaire */}
+
         </div>
       </div>
     </div>

@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/pages/_authentification.scss";
 import { useSession } from "./Session";
 
 const FirstConnection = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const { emailUser } = useSession();
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       setErrorMessage("Les mots de passe ne correspondent pas.");
       return;
     }
-    console.log(emailUser);
+
     const email = emailUser;
     try {
       const res = await axios.post("http://localhost:8080/api/forgotpassword", {
