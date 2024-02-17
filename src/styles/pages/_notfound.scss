@@ -1,0 +1,77 @@
+@import "./_authentification.scss";
+
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+  width: 100vw;
+  text-align: center;
+  background: $background-light;
+  color: $color-text-dark;
+  overflow: auto;
+
+  h1 {
+    font-size: 5rem;
+    color: $color-text-dark;
+  }
+
+  p {
+    margin: 1rem 0;
+    color: $color-text-dark;
+  }
+
+  .notfound {
+    margin: 2rem 0;
+    font-size: 1.5rem;
+    color: $color-text-dark;
+  }
+
+  .options {
+    margin: 2rem 0;
+
+    a {
+      @include button-style(
+        #fff,
+        $primary-color-light-mode,
+        $hover-color-light-mode
+      );
+      text-decoration: none;
+      padding: 1rem 2rem;
+    }
+  }
+  .notfound-image-container {
+    width: 60vw;
+    height: 30vh;
+    background-image: url("../../assets/image/kafka.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 2rem 0;
+    border-radius: $border-radius;
+  }
+}
+
+body.dark-mode .notfound-container {
+  background: $background-dark;
+  color: $color-text-light;
+
+  h1,
+  p,
+  .notfound {
+    color: $color-text-light;
+  }
+
+  .options a {
+    @include button-style(
+      $color-text-light,
+      $primary-color-dark-mode,
+      $hover-color-dark-mode
+    );
+  }
+}
+@media (max-width: 768px) {
+  .notfound-container {
+    height: 85vh;
+  }
+}

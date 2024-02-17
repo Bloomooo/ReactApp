@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/pages/_authentification.scss";
 import Nav from "../components/Nav";
+import { useSession } from "./Session";
 
-const Forgot = () => {
+const FirstConnection = () => {
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { emailUser } = useSession();
 
   const navigate = useNavigate();
 
@@ -21,7 +22,8 @@ const Forgot = () => {
       setErrorMessage("Les mots de passe ne correspondent pas.");
       return;
     }
-
+    console.log(emailUser);
+    const email = emailUser;
     try {
       const res = await axios.post("http://localhost:8080/api/forgotpassword", {
         email,
@@ -41,17 +43,7 @@ const Forgot = () => {
       <Nav />
       <div className="auth-container">
         <form className="auth-form" onSubmit={handleSubmit}>
-          <h2>Changer votre mot de passe</h2>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+          <h2>Configurer votre mot de passe</h2>
           <div className="form-group">
             <label htmlFor="password">Nouveau mot de passe</label>
             <div className="password-input-container">
@@ -94,7 +86,7 @@ const Forgot = () => {
 
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <button type="submit" className="btn-login">
-            Changer votre mot de passe
+            Configurer
           </button>
         </form>
       </div>
@@ -102,4 +94,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default FirstConnection;

@@ -160,3 +160,68 @@ body {
     }
   }
 }
+
+.error-message {
+  color: #ff3860;
+  background-color: rgba(255, 56, 96, 0.1);
+  border-radius: $border-radius;
+  padding: 1vh 2vh;
+  margin: 1vh 0 2vh;
+  text-align: center;
+  border: 1px solid #ff3860;
+  transition: all $transition-time;
+
+  &:not(:empty) {
+    box-shadow: 0 2px 4px $shadow-color;
+  }
+}
+
+.password-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.form-group input {
+  width: 90%;
+  padding: 1.5vh 3vh 1.5vh 1vh;
+  border: 0.1vh solid #ccc;
+  border-radius: 0.5vh;
+  background-color: transparent;
+  color: inherit;
+  transition: border-color $transition-time, box-shadow $transition-time;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 2vh;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-login {
+  @include button-style(
+    #ffffff,
+    $primary-color-light-mode,
+    $hover-color-light-mode
+  );
+}
+
+.auth-form.dark .btn-login {
+  @include button-style(
+    #ffffff,
+    $primary-color-dark-mode,
+    $hover-color-dark-mode
+  );
+}
+
+.auth-form.light .btn-login {
+  @include button-style(
+    #ffffff,
+    $primary-color-light-mode,
+    $hover-color-light-mode
+  );
+}
