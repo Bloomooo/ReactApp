@@ -1,10 +1,21 @@
 .taskCard {
-  background-color: #f0f0f0;
-  margin: 10px;
   padding: 10px;
+  margin: 5px 0;
   cursor: pointer;
-}
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 
-.taskCard:hover {
-  background-color: #e0e0e0;
+  // Styles par défaut
+  background-color: #f0f0f0; // Couleur de fond par défaut
+  &:hover {
+    background-color: #e2e2e2;
+  }
+
+  // Styles pour les tâches urgentes
+  &.urgent {
+    background-color: #ffcccc; // Rouge clair pour les tâches urgentes
+    &:hover {
+      background-color: #ffaaaa; // Un rouge légèrement plus foncé au survol
+    }
+  }
 }

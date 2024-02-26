@@ -34,19 +34,6 @@
   text-align: center;
 }
 
-.taskCard {
-  background-color: #eef3f7;
-  padding: 15px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-}
 .taskInput {
   display: flex;
   justify-content: center;
@@ -66,18 +53,15 @@
 
   button {
     padding: 10px 15px;
-    background-color: #007bff; // Couleur d'arrière-plan
-    color: white; // Couleur du texte
+    background-color: #007bff;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 0 4px 4px 0;
-    font-size: 20px; // Ajustez selon la taille de votre champ de saisie
+    font-size: 20px;
 
     &:hover {
-      background-color: darken(
-        #007bff,
-        10%
-      ); // Assombrir le bouton lors du survol
+      background-color: darken(#007bff, 10%);
     }
   }
 }

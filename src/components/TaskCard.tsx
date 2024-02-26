@@ -8,9 +8,20 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onMove }) => {
+  const cardClasses = `taskCard ${task.isUrgent ? "urgent" : ""}`;
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    e.dataTransfer.setData("task-id", task.id.toString());
+  };
+
   return (
-    <div className="taskCard" onClick={() => onMove(task)}>
-      {task.title}
+    <div
+      className={cardClasses}
+      draggable="true"
+      onDragStart={handleDragStart}
+      onClick={() => onMove(task)}
+    >
+      {task.title}, {task.employee}
     </div>
   );
 };
