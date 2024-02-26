@@ -1,0 +1,95 @@
+.todoList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f7f6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+.columns {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 20px;
+}
+
+.column {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.column h2 {
+  color: #333;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.taskCard {
+  background-color: #eef3f7;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+.taskInput {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  input {
+    padding: 10px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 300px; // Définissez une largeur fixe ou en pourcentage selon votre mise en page
+
+    &:focus {
+      border-color: #007bff; // Couleur de mise en évidence lors de la saisie
+    }
+  }
+
+  button {
+    padding: 10px 15px;
+    background-color: #007bff; // Couleur d'arrière-plan
+    color: white; // Couleur du texte
+    border: none;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    font-size: 20px; // Ajustez selon la taille de votre champ de saisie
+
+    &:hover {
+      background-color: darken(
+        #007bff,
+        10%
+      ); // Assombrir le bouton lors du survol
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
