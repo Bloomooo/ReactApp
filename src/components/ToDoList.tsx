@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import { Task } from "../interface/Task";
 import "../styles/components/_todolist.scss";
 
 const ToDoList = () => {
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskUrgency, setNewTaskUrgency] = useState(false);
+  const [newTaskEmployee, setNewTaskEmployee] = useState("");
+  const [newTaskStatus, setNewTaskStatus] = useState("À faire");
+  const [showForm, setShowForm] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
@@ -36,6 +40,21 @@ const ToDoList = () => {
     },
   ]);
 
+  const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (formRef.current && !formRef.current.contains(event.target as Node)) {
+        setShowForm(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [formRef]);
+
   const moveTask = (updatedTask: Task) => {
     const updatedTasks = tasks.map((task) =>
       task.id === updatedTask.id
@@ -64,28 +83,66 @@ const ToDoList = () => {
   const addTask = () => {
     if (newTaskTitle.trim() !== "") {
       const newTask: Task = {
-        id: Math.max(...tasks.map((task) => task.id)) + 1,
+        id: Math.max(0, ...tasks.map((task) => task.id)) + 1,
         title: newTaskTitle,
-        status: "À faire",
-        isUrgent: true,
-        employee: "ez",
+        status: newTaskStatus,
+        isUrgent: newTaskUrgency,
+        employee: newTaskEmployee,
       };
       setTasks([...tasks, newTask]);
       setNewTaskTitle("");
+      setNewTaskUrgency(false);
+      setNewTaskEmployee("");
+      setNewTaskStatus("À faire");
+      setShowForm(false);
     }
+  };
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
   };
 
   return (
     <div className="todoList">
       <div className="taskInput">
-        <input
-          type="text"
-          placeholder="Ajouter une nouvelle tâche..."
-          value={newTaskTitle}
-          onChange={(e) => setNewTaskTitle(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && addTask()}
-        />
-        <button onClick={addTask}>+</button>
+        <button className="addButton" onClick={toggleForm}>
+          <span>+</span>
+          <span className="addButtonText">Ajouter une carte</span>
+        </button>
+        {showForm && (
+          <div ref={formRef}>
+            <input
+              type="text"
+              placeholder="Titre de la tâche"
+              value={newTaskTitle}
+              onChange={(e) => setNewTaskTitle(e.target.value)}
+            />
+            <label>
+              <input
+                type="checkbox"
+                checked={newTaskUrgency}
+                onChange={(e) => setNewTaskUrgency(e.target.checked)}
+              />{" "}
+              Urgent
+            </label>
+            <input
+              type="text"
+              placeholder="Employé"
+              value={newTaskEmployee}
+              onChange={(e) => setNewTaskEmployee(e.target.value)}
+            />
+            Status :
+            <select
+              value={newTaskStatus}
+              onChange={(e) => setNewTaskStatus(e.target.value)}
+            >
+              <option value="À faire">À faire</option>
+              <option value="En cours">En cours</option>
+              <option value="Terminé">Terminé</option>
+            </select>
+            <button onClick={addTask}>Ajouter</button>
+          </div>
+        )}
       </div>
       <div className="columns">
         {["À faire", "En cours", "Terminé"].map((status) => (

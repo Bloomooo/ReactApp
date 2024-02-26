@@ -5,17 +5,15 @@
   border-radius: 4px;
   transition: background-color 0.3s ease;
 
-  // Styles par défaut
-  background-color: #f0f0f0; // Couleur de fond par défaut
+  background-color: #f0f0f0;
   &:hover {
     background-color: #e2e2e2;
   }
 
-  // Styles pour les tâches urgentes
   &.urgent {
-    background-color: #ffcccc; // Rouge clair pour les tâches urgentes
+    background-color: #ffcccc;
     &:hover {
-      background-color: #ffaaaa; // Un rouge légèrement plus foncé au survol
+      background-color: #ffaaaa;
     }
   }
 }

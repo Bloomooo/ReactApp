@@ -9,7 +9,9 @@
   width: 90%;
   max-width: 1200px;
   margin: 20px auto;
+  position: relative;
 }
+
 .columns {
   display: flex;
   justify-content: space-around;
@@ -34,35 +36,122 @@
   text-align: center;
 }
 
-.taskInput {
+.addButton {
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 20px;
+  overflow: hidden;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
 
-  input {
-    padding: 10px;
-    border-radius: 4px 0 0 4px;
-    border: 1px solid #ccc;
-    outline: none;
-    width: 300px; // Définissez une largeur fixe ou en pourcentage selon votre mise en page
-
-    &:focus {
-      border-color: #007bff; // Couleur de mise en évidence lors de la saisie
+  &:hover {
+    width: 180px;
+    border-radius: 20px;
+    .addButtonText {
+      display: inline;
     }
   }
 
-  button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 0 4px 4px 0;
-    font-size: 20px;
+  .addButtonText {
+    display: none;
+    margin-left: 10px;
+    font-size: 16px;
+    transition: display 0.2s ease-in-out;
+  }
+}
 
-    &:hover {
-      background-color: darken(#007bff, 10%);
-    }
+.taskInput div {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 250px;
+  max-width: 90%;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="text"],
+select {
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 2px solid transparent;
+  background-color: #e9ecef;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0 10px 0 0;
+  font: inherit;
+  color: #007bff;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #007bff;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+.taskInput input,
+.taskInput select,
+.taskInput button {
+  max-width: 100%;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  &:hover {
+    background-color: #000;
+    transform: translateY(-3px);
   }
 }
 
