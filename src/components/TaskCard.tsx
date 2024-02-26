@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "../interface/Task";
 import "../styles/components/_taskcard.scss";
 
@@ -8,10 +8,15 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onMove }) => {
+  const [showDetails, setShowDetails] = useState(false);
   const cardClasses = `taskCard ${task.isUrgent ? "urgent" : ""}`;
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData("task-id", task.id.toString());
+  };
+
+  const handleClick = () => {
+    setShowDetails(!showDetails);
   };
 
   return (
@@ -19,9 +24,20 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onMove }) => {
       className={cardClasses}
       draggable="true"
       onDragStart={handleDragStart}
-      onClick={() => onMove(task)}
+      onClick={handleClick}
     >
-      {task.title}, {task.employee}
+      {showDetails ? (
+        <div>
+          <p>Title : {task.title}</p>
+          <p>Employee : {task.employee}</p>
+          <p>Urgent ? : {task.isUrgent ? "Oui" : "Non"}</p>
+          <p>Status : {task.status}</p>
+        </div>
+      ) : (
+        <div>
+          {task.title}, {task.employee}
+        </div>
+      )}
     </div>
   );
 };
