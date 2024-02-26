@@ -9,6 +9,7 @@
   max-width: 1200px;
   margin: 20px auto;
   position: relative;
+  overflow-y: auto;
 }
 
 .columns {
@@ -85,7 +86,7 @@
 
 .taskInput div {
   position: absolute;
-  top: 50px;
+  top: calc(50%); /* Modifier cette valeur selon votre besoin */
   left: 50%;
   transform: translateX(-50%);
   width: auto;

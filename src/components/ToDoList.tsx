@@ -9,6 +9,7 @@ const ToDoList = () => {
   const [newTaskEmployee, setNewTaskEmployee] = useState("");
   const [newTaskStatus, setNewTaskStatus] = useState("À faire");
   const [showForm, setShowForm] = useState(false);
+  const [editingTask, setEditingTask] = useState<null | Task>(null);
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
@@ -32,8 +33,8 @@ const ToDoList = () => {
       employee: "ez",
     },
     {
-      id: 6,
-      title: "Tâche 6",
+      id: 4,
+      title: "Tâche 4",
       status: "En cours",
       isUrgent: true,
       employee: "ez",
@@ -43,17 +44,69 @@ const ToDoList = () => {
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent) => {
       if (formRef.current && !formRef.current.contains(event.target as Node)) {
         setShowForm(false);
+        clearForm();
       }
-    }
+    };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [formRef]);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const clearForm = () => {
+    setNewTaskTitle("");
+    setNewTaskUrgency(false);
+    setNewTaskEmployee("");
+    setNewTaskStatus("À faire");
+    setEditingTask(null);
+  };
+
+  const handleFormToggle = (task?: Task) => {
+    if (task) {
+      setEditingTask(task);
+      setNewTaskTitle(task.title);
+      setNewTaskUrgency(task.isUrgent);
+      setNewTaskEmployee(task.employee);
+      setNewTaskStatus(task.status);
+    } else {
+      clearForm();
+    }
+    setShowForm(!showForm);
+  };
+
+  const handleTaskSubmit = () => {
+    if (editingTask) {
+      const updatedTasks = tasks.map((task) =>
+        task.id === editingTask.id
+          ? {
+              ...task,
+              title: newTaskTitle,
+              isUrgent: newTaskUrgency,
+              employee: newTaskEmployee,
+              status: newTaskStatus,
+            }
+          : task
+      );
+      setTasks(updatedTasks);
+    } else {
+      const newTask = {
+        id: tasks.length > 0 ? Math.max(...tasks.map((t) => t.id)) + 1 : 1,
+        title: newTaskTitle,
+        isUrgent: newTaskUrgency,
+        employee: newTaskEmployee,
+        status: newTaskStatus,
+      };
+      setTasks([...tasks, newTask]);
+    }
+    setShowForm(false);
+    clearForm();
+  };
+
+  const deleteTask = (taskId: number) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
 
   const moveTask = (updatedTask: Task) => {
     const updatedTasks = tasks.map((task) =>
@@ -80,37 +133,15 @@ const ToDoList = () => {
     }
   };
 
-  const addTask = () => {
-    if (newTaskTitle.trim() !== "") {
-      const newTask: Task = {
-        id: Math.max(0, ...tasks.map((task) => task.id)) + 1,
-        title: newTaskTitle,
-        status: newTaskStatus,
-        isUrgent: newTaskUrgency,
-        employee: newTaskEmployee,
-      };
-      setTasks([...tasks, newTask]);
-      setNewTaskTitle("");
-      setNewTaskUrgency(false);
-      setNewTaskEmployee("");
-      setNewTaskStatus("À faire");
-      setShowForm(false);
-    }
-  };
-
-  const toggleForm = () => {
-    setShowForm(!showForm);
-  };
-
   return (
     <div className="todoList">
       <div className="taskInput">
-        <button className="addButton" onClick={toggleForm}>
+        <button className="addButton" onClick={() => handleFormToggle()}>
           <span>+</span>
-          <span className="addButtonText">Ajouter une carte</span>
+          <span className="addButtonText">Ajouter une tâche</span>
         </button>
         {showForm && (
-          <div ref={formRef}>
+          <div ref={formRef} className="taskForm">
             <input
               type="text"
               placeholder="Titre de la tâche"
@@ -122,7 +153,7 @@ const ToDoList = () => {
                 type="checkbox"
                 checked={newTaskUrgency}
                 onChange={(e) => setNewTaskUrgency(e.target.checked)}
-              />{" "}
+              />
               Urgent
             </label>
             <input
@@ -131,7 +162,7 @@ const ToDoList = () => {
               value={newTaskEmployee}
               onChange={(e) => setNewTaskEmployee(e.target.value)}
             />
-            Status :
+            <label>Status :</label>
             <select
               value={newTaskStatus}
               onChange={(e) => setNewTaskStatus(e.target.value)}
@@ -140,7 +171,7 @@ const ToDoList = () => {
               <option value="En cours">En cours</option>
               <option value="Terminé">Terminé</option>
             </select>
-            <button onClick={addTask}>Ajouter</button>
+            <button onClick={handleTaskSubmit}>Confirmer</button>
           </div>
         )}
       </div>
@@ -160,6 +191,8 @@ const ToDoList = () => {
                   key={task.id}
                   task={task}
                   onMove={() => moveTask({ ...task, status })}
+                  onDelete={() => deleteTask(task.id)}
+                  onEdit={() => handleFormToggle(task)}
                 />
               ))}
           </div>
