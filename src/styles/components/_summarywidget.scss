@@ -1,0 +1,19 @@
+.summary-widget {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-item h4 {
+  margin: 0;
+  color: #333;
+}
+
+.summary-item p {
+  font-size: 1.5em;
+  color: #666;
+}
