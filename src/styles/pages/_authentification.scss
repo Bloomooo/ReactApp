@@ -65,6 +65,7 @@ body {
   background: linear-gradient(-45deg, #000, #fff);
   background-size: 400% 400%;
   animation: animateGradient 15s ease infinite;
+  overflow: hidden;
 }
 
 .auth-form {

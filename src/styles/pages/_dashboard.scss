@@ -1,6 +1,6 @@
 .dashboard-container {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
   background-color: #fff;
-  // The width should naturally be 100% of the parent, which is typically the <body>
 }
