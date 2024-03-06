@@ -5,7 +5,7 @@ $color-hover: #0056b3;
 $nav-height: 8vh;
 $nav-item-spacing: 3.3vh;
 $underline-thickness: 0.266vh;
-$background-image-logo: url(../../assets/image/kafka.jpg);
+$background-image-logo: url(../../assets/image/logo192.png);
 $background-image-authentification: url(../../assets/image/compte.png);
 $logo-size: 8vh;
 $authentification-size: 5vh;
@@ -92,7 +92,7 @@ $authentification-size: 5vh;
   }
 
   .logo {
-    background-image: url(../../assets/image/kafka.jpg);
+    background-image: $background-image-logo;
   }
 
   .authentication {
